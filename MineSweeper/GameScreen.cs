@@ -17,19 +17,19 @@ namespace MineSweeper
         bool gameLose, firstClick;
 
         int bombNumber, bombsLeft;
-        public static int blockSize, rowLength, border;
+        public static int blockSize, rowLength, border, gameTime;
 
         List<block> blocks = new List<block>();
 
         Stopwatch gameWatch = new Stopwatch();
 
-        SolidBrush drawBrush = new SolidBrush(Color.White);
-        Pen drawPen = new Pen(Color.Red);
+        SolidBrush drawBrush = new SolidBrush(Color.Red);
+        Pen drawPen = new Pen(Color.Red, 3);
 
-        Font titleFont = new Font("Arial", 32);
+        Font titleFont = new Font("Arial", 24);
 
         selector gameSelector = new selector(0);
-        Point restartBlock;
+        Point restartBlock, timerPoint;
 
         Random rng = new Random();
         #endregion
@@ -61,6 +61,7 @@ namespace MineSweeper
             border = (this.Width - (rowLength * blockSize)) / 2;
 
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2 + 15);
+            timerPoint = new Point(blockSize * (rowLength - 1) + border - 20, border + 3);
 
             CreateBlocks(blockSize, rowLength);
 
@@ -75,6 +76,7 @@ namespace MineSweeper
             border = (this.Width - (rowLength * blockSize)) / 2;
 
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
+            timerPoint = new Point(blockSize * (rowLength - 2) + border - 10, border + 3);
 
             CreateBlocks(blockSize, rowLength);
             
@@ -98,22 +100,6 @@ namespace MineSweeper
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            //pause screen function
-            if (e.KeyCode == Keys.Escape)
-            {
-
-                DialogResult result = PauseForm.Show();
-
-                if (result == DialogResult.Cancel)
-                {
-                }
-                else if (result == DialogResult.Abort)
-                {
-                    MenuScreen ms = new MenuScreen();
-                    Form1.ChangeScreen(this, ms);
-                }
-            }
-
             switch (e.KeyCode)
             {
                 case Keys.Right:
@@ -138,10 +124,12 @@ namespace MineSweeper
                         gameLose = false;
                         blocks.Clear();
                         CreateBlocks(blockSize, rowLength);
+                        gameWatch.Reset();
                         firstClick = true;
                     }
                     else if (firstClick)
                     {
+                        gameWatch.Restart();
                         firstClick = false;
                         CreateBombs(bombNumber, gameSelector.index);
                         CreateNextTo();
@@ -163,7 +151,7 @@ namespace MineSweeper
                                 winGame = false;
                             }
                         }
-                        if (winGame) {  }
+                        if (winGame) { GameWin(); }
                     }
                     Refresh();
                     break;
@@ -220,8 +208,8 @@ namespace MineSweeper
                 if (b.bomb && b.revealed) { e.Graphics.DrawImage(Properties.Resources.revealedBomb, b.x, b.y, b.size, b.size); }
                 else if (gameLose && b.bomb && b.flag) { e.Graphics.DrawImage(Properties.Resources.flagBlock, b.x, b.y, b.size, b.size); }
                 else if (gameLose && b.flag && b.bomb == false) { e.Graphics.DrawImage(Properties.Resources.falseBomb, b.x, b.y, b.size, b.size); }
-                else if (gameLose && b.bomb) { e.Graphics.DrawImage(Properties.Resources.bombBlock, b.x, b.y, b.size, b.size); }
                 else if (b.flag) { e.Graphics.DrawImage(Properties.Resources.flagBlock, b.x, b.y, b.size, b.size); }
+                else if (gameLose && b.bomb) { e.Graphics.DrawImage(Properties.Resources.bombBlock, b.x, b.y, b.size, b.size); }
                 else if (b.revealed)
                 {
                     switch (b.nextTo)
@@ -260,8 +248,13 @@ namespace MineSweeper
                 else if (b.revealed == false) { e.Graphics.DrawImage(Properties.Resources.block, b.x, b.y, b.size, b.size); }
             }
 
+            drawBrush.Color = Color.Black;
+            e.Graphics.FillRectangle(drawBrush, timerPoint.X, timerPoint.Y, 63, 33);
+
+            drawBrush.Color = Color.Red;
+            gameTime = Convert.ToInt32(gameWatch.ElapsedMilliseconds) / 1000;
             e.Graphics.DrawImage(Properties.Resources.restartButton, restartBlock.X, restartBlock.Y, 30, 30);
-            //e.Graphics.DrawString();
+            e.Graphics.DrawString(gameTime.ToString("000"), titleFont, drawBrush, timerPoint);
 
             if (gameLose || gameSelector.index == -1) { e.Graphics.DrawRectangle(drawPen, restartBlock.X, restartBlock.Y, 30, 30); gameSelector.index = -1; }
             else { e.Graphics.DrawRectangle(drawPen, blocks[gameSelector.index].x, blocks[gameSelector.index].y, blocks[gameSelector.index].size, blocks[gameSelector.index].size); }
@@ -381,8 +374,8 @@ namespace MineSweeper
 
         private void GameWin ()
         {
-            MenuScreen ms = new MenuScreen();
-            Form1.ChangeScreen(this, ms);
+            gameTime = Convert.ToInt32(gameWatch.ElapsedMilliseconds) / 1000;
+            gameWatch.Reset();
         }
     }
 }
