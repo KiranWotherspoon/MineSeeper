@@ -29,7 +29,7 @@ namespace MineSweeper
         Font titleFont = new Font("Arial", 24);
 
         selector gameSelector = new selector(0);
-        Point restartBlock, timerPoint;
+        Point restartBlock, timerPoint, bombPoint;
 
         Random rng = new Random();
         #endregion
@@ -61,7 +61,8 @@ namespace MineSweeper
             border = (this.Width - (rowLength * blockSize)) / 2;
 
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2 + 15);
-            timerPoint = new Point(blockSize * (rowLength - 1) + border - 20, border + 3);
+            timerPoint = new Point(this.Width - border - 66, border + 3);
+            bombPoint = new Point(border + 3, border + 3);
 
             CreateBlocks(blockSize, rowLength);
 
@@ -76,7 +77,8 @@ namespace MineSweeper
             border = (this.Width - (rowLength * blockSize)) / 2;
 
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
-            timerPoint = new Point(blockSize * (rowLength - 2) + border - 10, border + 3);
+            timerPoint = new Point(this.Width - border - 66, border + 3);
+            bombPoint = new Point(border + 3, border + 3);
 
             CreateBlocks(blockSize, rowLength);
             
@@ -91,6 +93,8 @@ namespace MineSweeper
             border = (this.Width - (rowLength * blockSize)) / 2;
 
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
+            timerPoint = new Point(this.Width - border - 66, border + 3);
+            bombPoint = new Point(border + 3, border + 3);
 
             CreateBlocks(blockSize, rowLength);
            
@@ -122,6 +126,7 @@ namespace MineSweeper
                     if (gameSelector.index == -1)
                     {
                         gameLose = false;
+                        bombsLeft = bombNumber;
                         blocks.Clear();
                         CreateBlocks(blockSize, rowLength);
                         gameWatch.Reset();
@@ -129,7 +134,7 @@ namespace MineSweeper
                     }
                     else if (firstClick)
                     {
-                        gameWatch.Restart();
+                        gameWatch.Start();
                         firstClick = false;
                         CreateBombs(bombNumber, gameSelector.index);
                         CreateNextTo();
@@ -138,6 +143,7 @@ namespace MineSweeper
                     else if (blocks[gameSelector.index].bomb)
                     {
                         gameLose = true;
+                        gameWatch.Stop();
                         blocks[gameSelector.index].revealed = true;
                     }
                     else if (blocks[gameSelector.index].flag == false)
@@ -156,7 +162,21 @@ namespace MineSweeper
                     Refresh();
                     break;
                 case Keys.Space:
-                    if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag)
+                    if (firstClick)
+                    {
+                        gameWatch.Start();
+                        if (blocks[gameSelector.index].flag)
+                        {
+                            blocks[gameSelector.index].flag = false;
+                            bombsLeft++;
+                        }
+                        else
+                        {
+                            blocks[gameSelector.index].flag = true;
+                            bombsLeft--;
+                        }
+                    }
+                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag)
                     {
                         blocks[gameSelector.index].flag = false;
                         bombsLeft++;
@@ -168,40 +188,16 @@ namespace MineSweeper
                     }
                     Refresh();
                     break;
-            }
-        }
-
-        private void GameScreen_KeyUp(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Right:
-                    break;
-                case Keys.Left:
-                    break;
-                case Keys.Up:
-                    break;
-                case Keys.Down:
-                    break;
-                case Keys.Enter:
-                    break;
-                case Keys.Space:
+                case Keys.Escape:
+                    MenuScreen ms = new MenuScreen();
+                    Form1.ChangeScreen(this, ms);
                     break;
             }
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-            #region border drawing
-            e.Graphics.DrawImage(Properties.Resources.border, 0, 0, border, this.Height);
-            e.Graphics.DrawImage(Properties.Resources.borderHorizontal, 0, 0, this.Width, border);
-            e.Graphics.DrawImage(Properties.Resources.border, this.Width - border, 0, border, this.Height);
-            e.Graphics.DrawImage(Properties.Resources.borderHorizontal, 0, this.Height - border, this.Width, border);
-            e.Graphics.DrawImage(Properties.Resources.borderCornerTL, 0, 0, border, border);
-            e.Graphics.DrawImage(Properties.Resources.borderCornerTR, this.Width - border, 0, border, border);
-            e.Graphics.DrawImage(Properties.Resources.borderCornerBR, this.Width - border, this.Height - border, border, border);
-            e.Graphics.DrawImage(Properties.Resources.borderCorner, 0, this.Height - border, border, border);
-            #endregion
+            Form1.DrawBorders(this.Height, this.Width, border, e.Graphics);
 
             foreach (block b in blocks)
             {
@@ -250,11 +246,14 @@ namespace MineSweeper
 
             drawBrush.Color = Color.Black;
             e.Graphics.FillRectangle(drawBrush, timerPoint.X, timerPoint.Y, 63, 33);
+            e.Graphics.FillRectangle(drawBrush, bombPoint.X, bombPoint.Y, 63, 33);
 
             drawBrush.Color = Color.Red;
             gameTime = Convert.ToInt32(gameWatch.ElapsedMilliseconds) / 1000;
-            e.Graphics.DrawImage(Properties.Resources.restartButton, restartBlock.X, restartBlock.Y, 30, 30);
             e.Graphics.DrawString(gameTime.ToString("000"), titleFont, drawBrush, timerPoint);
+            e.Graphics.DrawImage(Properties.Resources.restartButton, restartBlock.X, restartBlock.Y, 30, 30);
+            if (bombsLeft <= 0) { e.Graphics.DrawString("000", titleFont, drawBrush, bombPoint); }
+            else { e.Graphics.DrawString(bombsLeft.ToString("000"), titleFont, drawBrush, bombPoint); }
 
             if (gameLose || gameSelector.index == -1) { e.Graphics.DrawRectangle(drawPen, restartBlock.X, restartBlock.Y, 30, 30); gameSelector.index = -1; }
             else { e.Graphics.DrawRectangle(drawPen, blocks[gameSelector.index].x, blocks[gameSelector.index].y, blocks[gameSelector.index].size, blocks[gameSelector.index].size); }
@@ -374,8 +373,7 @@ namespace MineSweeper
 
         private void GameWin ()
         {
-            gameTime = Convert.ToInt32(gameWatch.ElapsedMilliseconds) / 1000;
-            gameWatch.Reset();
+            gameWatch.Stop();
         }
     }
 }

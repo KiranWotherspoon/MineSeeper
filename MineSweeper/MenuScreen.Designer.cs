@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.hardButton = new System.Windows.Forms.RadioButton();
-            this.medButton = new System.Windows.Forms.RadioButton();
-            this.easyButton = new System.Windows.Forms.RadioButton();
             this.exitButton = new System.Windows.Forms.Button();
             this.scoreButton = new System.Windows.Forms.Button();
             this.playButton = new System.Windows.Forms.Button();
+            this.easyButton = new System.Windows.Forms.Button();
+            this.mediumButton = new System.Windows.Forms.Button();
+            this.hardButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -47,79 +47,120 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Minesweeper";
             // 
-            // hardButton
-            // 
-            this.hardButton.AutoSize = true;
-            this.hardButton.Location = new System.Drawing.Point(315, 200);
-            this.hardButton.Name = "hardButton";
-            this.hardButton.Size = new System.Drawing.Size(55, 17);
-            this.hardButton.TabIndex = 12;
-            this.hardButton.TabStop = true;
-            this.hardButton.Text = "Expert";
-            this.hardButton.UseVisualStyleBackColor = true;
-            // 
-            // medButton
-            // 
-            this.medButton.AutoSize = true;
-            this.medButton.Location = new System.Drawing.Point(315, 176);
-            this.medButton.Name = "medButton";
-            this.medButton.Size = new System.Drawing.Size(83, 17);
-            this.medButton.TabIndex = 11;
-            this.medButton.TabStop = true;
-            this.medButton.Text = "Intermediate";
-            this.medButton.UseVisualStyleBackColor = true;
-            // 
-            // easyButton
-            // 
-            this.easyButton.AutoSize = true;
-            this.easyButton.Checked = true;
-            this.easyButton.Location = new System.Drawing.Point(315, 153);
-            this.easyButton.Name = "easyButton";
-            this.easyButton.Size = new System.Drawing.Size(67, 17);
-            this.easyButton.TabIndex = 10;
-            this.easyButton.TabStop = true;
-            this.easyButton.Text = "Beginner";
-            this.easyButton.UseVisualStyleBackColor = true;
-            // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(181, 411);
+            this.exitButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.exitButton.FlatAppearance.BorderSize = 5;
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Location = new System.Drawing.Point(188, 380);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(123, 64);
-            this.exitButton.TabIndex = 9;
+            this.exitButton.TabIndex = 6;
             this.exitButton.Text = "Exit";
-            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.exitButton.Enter += new System.EventHandler(this.exitButton_Enter);
+            this.exitButton.Leave += new System.EventHandler(this.exitButton_Leave);
             // 
             // scoreButton
             // 
-            this.scoreButton.Location = new System.Drawing.Point(181, 283);
+            this.scoreButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.scoreButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.scoreButton.FlatAppearance.BorderSize = 5;
+            this.scoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.scoreButton.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreButton.Location = new System.Drawing.Point(188, 244);
             this.scoreButton.Name = "scoreButton";
             this.scoreButton.Size = new System.Drawing.Size(123, 64);
-            this.scoreButton.TabIndex = 8;
+            this.scoreButton.TabIndex = 5;
             this.scoreButton.Text = "Highscores";
-            this.scoreButton.UseVisualStyleBackColor = true;
+            this.scoreButton.UseVisualStyleBackColor = false;
             this.scoreButton.Click += new System.EventHandler(this.scoreButton_Click);
+            this.scoreButton.Enter += new System.EventHandler(this.scoreButton_Enter);
+            this.scoreButton.Leave += new System.EventHandler(this.scoreButton_Leave);
             // 
             // playButton
             // 
-            this.playButton.Location = new System.Drawing.Point(181, 150);
+            this.playButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.playButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.playButton.FlatAppearance.BorderSize = 5;
+            this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.playButton.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.Location = new System.Drawing.Point(188, 120);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(123, 67);
-            this.playButton.TabIndex = 7;
+            this.playButton.TabIndex = 1;
             this.playButton.Text = "Play";
-            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.UseVisualStyleBackColor = false;
             this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            this.playButton.Enter += new System.EventHandler(this.playButton_Enter);
+            this.playButton.Leave += new System.EventHandler(this.playButton_Leave);
+            // 
+            // easyButton
+            // 
+            this.easyButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.easyButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.easyButton.FlatAppearance.BorderSize = 5;
+            this.easyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.easyButton.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.easyButton.Location = new System.Drawing.Point(188, 120);
+            this.easyButton.Name = "easyButton";
+            this.easyButton.Size = new System.Drawing.Size(123, 67);
+            this.easyButton.TabIndex = 14;
+            this.easyButton.Text = "Beginner";
+            this.easyButton.UseVisualStyleBackColor = false;
+            this.easyButton.Visible = false;
+            this.easyButton.Click += new System.EventHandler(this.easyButton_Click);
+            this.easyButton.Enter += new System.EventHandler(this.easyButton_Enter);
+            this.easyButton.Leave += new System.EventHandler(this.easyButton_Leave);
+            // 
+            // mediumButton
+            // 
+            this.mediumButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.mediumButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.mediumButton.FlatAppearance.BorderSize = 5;
+            this.mediumButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mediumButton.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mediumButton.Location = new System.Drawing.Point(188, 207);
+            this.mediumButton.Name = "mediumButton";
+            this.mediumButton.Size = new System.Drawing.Size(123, 64);
+            this.mediumButton.TabIndex = 15;
+            this.mediumButton.Text = "Intermediate";
+            this.mediumButton.UseVisualStyleBackColor = false;
+            this.mediumButton.Visible = false;
+            this.mediumButton.Click += new System.EventHandler(this.mediumButton_Click);
+            this.mediumButton.Enter += new System.EventHandler(this.mediumButton_Enter);
+            this.mediumButton.Leave += new System.EventHandler(this.mediumButton_Leave);
+            // 
+            // hardButton
+            // 
+            this.hardButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.hardButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.hardButton.FlatAppearance.BorderSize = 5;
+            this.hardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hardButton.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hardButton.Location = new System.Drawing.Point(188, 295);
+            this.hardButton.Name = "hardButton";
+            this.hardButton.Size = new System.Drawing.Size(123, 64);
+            this.hardButton.TabIndex = 16;
+            this.hardButton.Text = "Expert";
+            this.hardButton.UseVisualStyleBackColor = false;
+            this.hardButton.Visible = false;
+            this.hardButton.Click += new System.EventHandler(this.hardButton_Click);
+            this.hardButton.Enter += new System.EventHandler(this.hardButton_Enter);
+            this.hardButton.Leave += new System.EventHandler(this.hardButton_Leave);
             // 
             // MenuScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.hardButton);
-            this.Controls.Add(this.medButton);
+            this.Controls.Add(this.mediumButton);
             this.Controls.Add(this.easyButton);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.scoreButton);
             this.Controls.Add(this.playButton);
@@ -134,11 +175,11 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton hardButton;
-        private System.Windows.Forms.RadioButton medButton;
-        private System.Windows.Forms.RadioButton easyButton;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button scoreButton;
         private System.Windows.Forms.Button playButton;
+        private System.Windows.Forms.Button easyButton;
+        private System.Windows.Forms.Button mediumButton;
+        private System.Windows.Forms.Button hardButton;
     }
 }
