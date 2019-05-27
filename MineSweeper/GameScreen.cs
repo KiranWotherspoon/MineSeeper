@@ -104,6 +104,23 @@ namespace MineSweeper
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            if (e.KeyCode == Keys.Escape)
+            {
+                gameWatch.Stop();
+
+                DialogResult result = PauseForm.Show();
+
+                if (result == DialogResult.Cancel)
+                {
+                    gameWatch.Start();
+                }
+                else if (result == DialogResult.Abort)
+                {
+                    MenuScreen ms = new MenuScreen();
+                    Form1.ChangeScreen(this, ms);
+                }
+            }
+
             switch (e.KeyCode)
             {
                 case Keys.Right:
@@ -187,10 +204,6 @@ namespace MineSweeper
                         bombsLeft--;
                     }
                     Refresh();
-                    break;
-                case Keys.Escape:
-                    MenuScreen ms = new MenuScreen();
-                    Form1.ChangeScreen(this, ms);
                     break;
             }
         }

@@ -201,6 +201,42 @@ namespace MineSweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;highscore&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;&lt;/points&gt;
+        ///    &lt;name&gt;&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;&lt;/points&gt;
+        ///    &lt;name&gt;&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;&lt;/points&gt;
+        ///    &lt;name&gt;&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;&lt;/points&gt;
+        ///    &lt;name&gt;&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;&lt;/points&gt;
+        ///    &lt;name&gt;&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;&lt;/points&gt;
+        ///    &lt;name&gt;&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///&lt;/highscore&gt;
+        ///.
+        /// </summary>
+        internal static string highScores {
+            get {
+                return ResourceManager.GetString("highScores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap oneBlock {
