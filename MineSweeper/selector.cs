@@ -20,17 +20,17 @@ namespace MineSweeper
             switch (direction)
             {
                 case "left":
-                    if (index % GameScreen.rowLength != 0 && index != -1) { index--; }
+                    if (index % GameScreen.rowLength != 0 && index != -1) { index--; GameScreen.moves++; }
                     break;
                 case "right":
-                    if ((index + 1) % GameScreen.rowLength != 0 && index != -1) { index++; }
+                    if ((index + 1) % GameScreen.rowLength != 0 && index != -1) { index++; GameScreen.moves++; }
                     break;
                 case "down":
                     if (index == -1) { index = 0; }
-                    else if (index < blocks.Count - GameScreen.rowLength) { index += GameScreen.rowLength; }
+                    else if (index < blocks.Count - GameScreen.rowLength) { index += GameScreen.rowLength; GameScreen.moves++; }
                     break;
                 case "up":
-                    if (index > GameScreen.rowLength - 1) { index -= GameScreen.rowLength; }
+                    if (index > GameScreen.rowLength - 1) { index -= GameScreen.rowLength; GameScreen.moves++; }
                     else if (index < GameScreen.rowLength) { index = -1; }
                     break;
             }

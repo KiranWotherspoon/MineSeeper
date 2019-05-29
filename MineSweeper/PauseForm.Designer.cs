@@ -34,6 +34,7 @@
             // 
             // continueButton
             // 
+            this.continueButton.BackColor = System.Drawing.Color.Gainsboro;
             this.continueButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkBlue;
             this.continueButton.FlatAppearance.BorderSize = 5;
             this.continueButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -43,13 +44,14 @@
             this.continueButton.Size = new System.Drawing.Size(151, 54);
             this.continueButton.TabIndex = 0;
             this.continueButton.Text = "Continue";
-            this.continueButton.UseVisualStyleBackColor = true;
+            this.continueButton.UseVisualStyleBackColor = false;
             this.continueButton.Click += new System.EventHandler(this.continueButton_Click);
             this.continueButton.Enter += new System.EventHandler(this.continueButton_Enter);
             this.continueButton.Leave += new System.EventHandler(this.continueButton_Leave);
             // 
             // exitButton
             // 
+            this.exitButton.BackColor = System.Drawing.Color.Gainsboro;
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkBlue;
             this.exitButton.FlatAppearance.BorderSize = 5;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -59,8 +61,10 @@
             this.exitButton.Size = new System.Drawing.Size(151, 54);
             this.exitButton.TabIndex = 1;
             this.exitButton.Text = "Exit";
-            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.exitButton.Enter += new System.EventHandler(this.exitButton_Enter);
+            this.exitButton.Leave += new System.EventHandler(this.exitButton_Leave);
             // 
             // PauseForm
             // 

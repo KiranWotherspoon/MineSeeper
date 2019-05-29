@@ -14,7 +14,7 @@ namespace MineSweeper
     public partial class Form1 : Form
     {
         public static string difficulty;
-        public static List<score> highScore = new List<score>();
+        public static List<string> scores = new List<string>();
 
         public Form1()
         {
@@ -46,29 +46,41 @@ namespace MineSweeper
 
         public static void ReadScores()
         {
-            XmlReader reader = XmlReader.Create(Properties.Resources.highScores);
+            XmlReader reader = XmlReader.Create("Resources/Score.xml");
 
             while (reader.Read())
             {
-                score s = new score();
+                string s;
+                reader.ReadToFollowing("points");
+                s = reader.ReadString();
 
-                reader.ReadToFollowing("score");
-                s.points = Convert.ToInt16(reader.GetAttribute("point"));
-                s.name = reader.GetAttribute("name");
-
-                if (s.points != 0)
+                if (s != null)
                 {
-                    highScore.Add(s);
+                    scores.Add(s);
                 }
             }
+
         }
 
         public static void SaveScores ()
         {
-            //highScores.Add();
-            highScore.Sort();
+            scores.Sort();
 
-            //XmlWriter writer = new XmlWriter(Properties.Resources.highScores);
+            XmlWriter writer = XmlWriter.Create(Properties.Resources.Score);
+
+            writer.WriteStartElement("highscores");
+
+            int counter = 0;
+            for (int i = scores.Count - 1; i >= 0; i--)
+            {
+                writer.WriteStartElement("score");
+                writer.WriteElementString("points", scores[i]);
+                writer.WriteEndElement();
+                counter++;
+                if (counter > 6) { break; }
+            }
+
+            writer.WriteEndElement();
         }
     }
 }

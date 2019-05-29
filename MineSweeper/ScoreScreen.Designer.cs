@@ -28,20 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Sitka Small", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(164, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 40);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Highscores";
             // 
             // ScoreScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.label1);
             this.Name = "ScoreScreen";
             this.Size = new System.Drawing.Size(510, 550);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ScoreScreen_Paint);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ScoreScreen_PreviewKeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -17,6 +17,7 @@ namespace MineSweeper
         public MenuScreen()
         {
             InitializeComponent();
+            Form1.ReadScores();
             playButton.Focus();
         }
 

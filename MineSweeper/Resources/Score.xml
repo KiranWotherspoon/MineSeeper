@@ -1,27 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <highscore>
   <score>
-    <points></points>
-    <name></name>
+    <points>100</points>
   </score>
   <score>
-    <points></points>
-    <name></name>
+    <points>150</points>
   </score>
   <score>
-    <points></points>
-    <name></name>
+    <points>200</points>
   </score>
   <score>
-    <points></points>
-    <name></name>
+    <points>350</points>
   </score>
   <score>
-    <points></points>
-    <name></name>
+    <points>120</points>
   </score>
   <score>
-    <points></points>
-    <name></name>
+    <points>125</points>
   </score>
 </highscore>

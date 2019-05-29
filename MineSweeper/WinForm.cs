@@ -10,21 +10,22 @@ using System.Windows.Forms;
 
 namespace MineSweeper
 {
-    public partial class PauseForm : Form
+    public partial class WinForm : Form
     {
-        private static PauseForm pauseForm;
+        private static WinForm winForm;
         private static DialogResult buttonResult = new DialogResult();
 
-        public PauseForm()
+        public WinForm()
         {
             InitializeComponent();
+            WinLabels();
         }
 
         public static DialogResult Show()
 
         {
-            pauseForm = new PauseForm();
-            pauseForm.ShowDialog();
+            winForm = new WinForm();
+            winForm.ShowDialog();
 
             return buttonResult;
         }
@@ -43,38 +44,46 @@ namespace MineSweeper
                     break;
             }
 
-            pauseForm.Close();
+            winForm.Close();
 
+        }
+
+        private void WinLabels ()
+        {
+            movesLabel.Text = "Moves taken: " + GameScreen.moves;
+            timeLabel.Text = "Time Taken: " + GameScreen.gameTime;
+            scoreLabel.Text = "Total score: " + GameScreen.score;
         }
 
         private void continueButton_Click(object sender, EventArgs e)
         {
             buttonResult = DialogResult.Cancel;
-            pauseForm.Close();
+            winForm.Close();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
         {
             buttonResult = DialogResult.Abort;
-            pauseForm.Close();
+            winForm.Close();
         }
+
 
         private void continueButton_Enter(object sender, EventArgs e)
         {
             continueButton.BackColor = Color.DimGray;
         }
 
-        private void continueButton_Leave(object sender, EventArgs e)
+        private void continueButton_Leave_1(object sender, EventArgs e)
         {
             continueButton.BackColor = Color.Gainsboro;
         }
 
-        private void exitButton_Enter(object sender, EventArgs e)
+        private void exitButton_Enter_1(object sender, EventArgs e)
         {
             exitButton.BackColor = Color.DimGray;
         }
 
-        private void exitButton_Leave(object sender, EventArgs e)
+        private void exitButton_Leave_1(object sender, EventArgs e)
         {
             exitButton.BackColor = Color.Gainsboro;
         }

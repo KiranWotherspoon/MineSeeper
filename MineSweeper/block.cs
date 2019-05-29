@@ -33,7 +33,7 @@ namespace MineSweeper
             //if the block has no bombs next to it (and isn't a bomb itself), reveal all the blocks around it HOWEVER, don't reveal blocks that are flagged
             if (nextTo == 0 && bomb == false)
             {
-                if (index > GameScreen.rowLength)
+                if (index >= GameScreen.rowLength)
                 {
                     if (index % GameScreen.rowLength != 0)
                     {

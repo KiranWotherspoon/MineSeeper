@@ -17,7 +17,7 @@ namespace MineSweeper
         bool gameLose, firstClick;
 
         int bombNumber, bombsLeft;
-        public static int blockSize, rowLength, border, gameTime;
+        public static int blockSize, rowLength, border, moves, gameTime, score;
 
         List<block> blocks = new List<block>();
 
@@ -66,6 +66,7 @@ namespace MineSweeper
 
             CreateBlocks(blockSize, rowLength);
 
+            moves = 0;
             firstClick = true;
         }
 
@@ -81,7 +82,9 @@ namespace MineSweeper
             bombPoint = new Point(border + 3, border + 3);
 
             CreateBlocks(blockSize, rowLength);
-            
+
+
+            moves = 0;
             firstClick = true;
         }
 
@@ -97,7 +100,9 @@ namespace MineSweeper
             bombPoint = new Point(border + 3, border + 3);
 
             CreateBlocks(blockSize, rowLength);
-           
+
+
+            moves = 0;
             firstClick = true;
         }
         #endregion
@@ -105,8 +110,7 @@ namespace MineSweeper
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
-            {
-                gameWatch.Stop();
+            {gameWatch.Stop();
 
                 DialogResult result = PauseForm.Show();
 
@@ -147,12 +151,14 @@ namespace MineSweeper
                         blocks.Clear();
                         CreateBlocks(blockSize, rowLength);
                         gameWatch.Reset();
+                        moves = 0;
                         firstClick = true;
                     }
                     else if (firstClick)
                     {
                         gameWatch.Start();
                         firstClick = false;
+                        moves++;
                         CreateBombs(bombNumber, gameSelector.index);
                         CreateNextTo();
                         blocks[gameSelector.index].Reveal(gameSelector.index, blocks);
@@ -161,11 +167,13 @@ namespace MineSweeper
                     {
                         gameLose = true;
                         gameWatch.Stop();
+                        moves++;
                         blocks[gameSelector.index].revealed = true;
                     }
                     else if (blocks[gameSelector.index].flag == false)
                     {
                         blocks[gameSelector.index].Reveal(gameSelector.index, blocks);
+                        moves++;
                         bool winGame = true;
                         foreach (block b in blocks)
                         {
@@ -179,13 +187,14 @@ namespace MineSweeper
                     Refresh();
                     break;
                 case Keys.Space:
-                    if (firstClick)
+                    if (firstClick && gameSelector.index != -1)
                     {
                         gameWatch.Start();
                         if (blocks[gameSelector.index].flag)
                         {
                             blocks[gameSelector.index].flag = false;
                             bombsLeft++;
+                            moves++;
                         }
                         else
                         {
@@ -193,16 +202,17 @@ namespace MineSweeper
                             bombsLeft--;
                         }
                     }
-                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag)
+                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag && gameSelector.index != -1)
                     {
                         blocks[gameSelector.index].flag = false;
                         bombsLeft++;
                     }
-                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag == false)
+                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag == false && gameSelector.index != -1)
                     {
                         blocks[gameSelector.index].flag = true;
                         bombsLeft--;
                     }
+                    moves++;
                     Refresh();
                     break;
             }
@@ -300,8 +310,8 @@ namespace MineSweeper
                 {
                     validIndex = true;
                     index = rng.Next(0, blocks.Count);
-
-                    if (startBlock > rowLength)
+                    if (index == startBlock) { validIndex = false; }
+                    if (startBlock >= rowLength)
                     {
                         if (startBlock % rowLength != 0)
                         {
@@ -347,7 +357,7 @@ namespace MineSweeper
             {
                 if (blocks[i].bomb == false)
                 {
-                    if (i > rowLength)
+                    if (i >= rowLength)
                     {
                         if (i % rowLength != 0)
                         {
@@ -387,6 +397,21 @@ namespace MineSweeper
         private void GameWin ()
         {
             gameWatch.Stop();
+
+            score = 5000 - gameTime - moves;
+            Form1.scores.Add(score.ToString());
+
+            DialogResult result = WinForm.Show();
+
+            if (result == DialogResult.Cancel)
+            {
+               
+            }
+            else if (result == DialogResult.Abort)
+            {
+                MenuScreen ms = new MenuScreen();
+                Form1.ChangeScreen(this, ms);
+            }
         }
     }
 }
