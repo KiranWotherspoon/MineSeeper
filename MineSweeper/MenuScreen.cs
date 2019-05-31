@@ -17,7 +17,7 @@ namespace MineSweeper
         public MenuScreen()
         {
             InitializeComponent();
-            Form1.ReadScores();
+            if (Form1.scores.Count == 0) { Form1.ReadScores(); }
             playButton.Focus();
         }
 
@@ -47,7 +47,11 @@ namespace MineSweeper
                 playButton.Visible = scoreButton.Visible = true;
                 easyButton.Visible = mediumButton.Visible = hardButton.Visible = false;
             }
-            else { Application.Exit(); }
+            else
+            {
+                //Form1.SaveScores();
+                Application.Exit();
+            }
         }
 
         private void scoreButton_Click(object sender, EventArgs e)

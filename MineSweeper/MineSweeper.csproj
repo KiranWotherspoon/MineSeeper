@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="score.cs" />
     <Compile Include="ScoreScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -191,9 +192,7 @@
     <None Include="Resources\falseBomb.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Score.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="bin\Debug\Resources\highScore.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -83,11 +83,11 @@
             this.continueButton.FlatAppearance.BorderSize = 5;
             this.continueButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.continueButton.Font = new System.Drawing.Font("Sitka Small", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.continueButton.Location = new System.Drawing.Point(45, 230);
+            this.continueButton.Location = new System.Drawing.Point(34, 230);
             this.continueButton.Name = "continueButton";
-            this.continueButton.Size = new System.Drawing.Size(100, 46);
+            this.continueButton.Size = new System.Drawing.Size(117, 46);
             this.continueButton.TabIndex = 4;
-            this.continueButton.Text = "Return";
+            this.continueButton.Text = "Go Again";
             this.continueButton.UseVisualStyleBackColor = false;
             this.continueButton.Click += new System.EventHandler(this.continueButton_Click);
             this.continueButton.Enter += new System.EventHandler(this.continueButton_Enter);

@@ -14,7 +14,7 @@ namespace MineSweeper
     public partial class GameScreen : UserControl
     {
         #region Global Values
-        bool gameLose, firstClick;
+        bool gameLose, gameWin, firstClick;
 
         int bombNumber, bombsLeft;
         public static int blockSize, rowLength, border, moves, gameTime, score;
@@ -50,6 +50,7 @@ namespace MineSweeper
                     HardStart();
                     break;
             }
+            gameTimer.Enabled = true;
         }
 
         #region Start Functions
@@ -63,6 +64,8 @@ namespace MineSweeper
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2 + 15);
             timerPoint = new Point(this.Width - border - 66, border + 3);
             bombPoint = new Point(border + 3, border + 3);
+
+            timerLabel.Location = timerPoint;
 
             CreateBlocks(blockSize, rowLength);
 
@@ -81,6 +84,8 @@ namespace MineSweeper
             timerPoint = new Point(this.Width - border - 66, border + 3);
             bombPoint = new Point(border + 3, border + 3);
 
+            timerLabel.Location = timerPoint;
+
             CreateBlocks(blockSize, rowLength);
 
 
@@ -98,6 +103,8 @@ namespace MineSweeper
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
             timerPoint = new Point(this.Width - border - 66, border + 3);
             bombPoint = new Point(border + 3, border + 3);
+
+            timerLabel.Location = timerPoint;
 
             CreateBlocks(blockSize, rowLength);
 
@@ -147,6 +154,7 @@ namespace MineSweeper
                     if (gameSelector.index == -1)
                     {
                         gameLose = false;
+                        gameWin = false;
                         bombsLeft = bombNumber;
                         blocks.Clear();
                         CreateBlocks(blockSize, rowLength);
@@ -182,12 +190,18 @@ namespace MineSweeper
                                 winGame = false;
                             }
                         }
-                        if (winGame) { GameWin(); }
+                        if (winGame)
+                        {
+                            gameWin = true;
+                            Refresh();
+                            GameWin();
+                        }
                     }
                     Refresh();
                     break;
                 case Keys.Space:
-                    if (firstClick && gameSelector.index != -1)
+                    if (gameSelector.index == -1) { }
+                    else if (firstClick && gameSelector.index != -1)
                     {
                         gameWatch.Start();
                         if (blocks[gameSelector.index].flag)
@@ -216,6 +230,13 @@ namespace MineSweeper
                     Refresh();
                     break;
             }
+        }
+
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+            gameTime = Convert.ToInt32(gameWatch.ElapsedMilliseconds) / 1000;
+            timerLabel.Text = gameTime.ToString("000");
+            timerLabel.Refresh();
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -267,18 +288,15 @@ namespace MineSweeper
                 else if (b.revealed == false) { e.Graphics.DrawImage(Properties.Resources.block, b.x, b.y, b.size, b.size); }
             }
 
-            drawBrush.Color = Color.Black;
-            e.Graphics.FillRectangle(drawBrush, timerPoint.X, timerPoint.Y, 63, 33);
-            e.Graphics.FillRectangle(drawBrush, bombPoint.X, bombPoint.Y, 63, 33);
-
-            drawBrush.Color = Color.Red;
-            gameTime = Convert.ToInt32(gameWatch.ElapsedMilliseconds) / 1000;
-            e.Graphics.DrawString(gameTime.ToString("000"), titleFont, drawBrush, timerPoint);
             e.Graphics.DrawImage(Properties.Resources.restartButton, restartBlock.X, restartBlock.Y, 30, 30);
+
+            drawBrush.Color = Color.Black;
+            e.Graphics.FillRectangle(drawBrush, bombPoint.X, bombPoint.Y, 63, 33);
+            drawBrush.Color = Color.Red;
             if (bombsLeft <= 0) { e.Graphics.DrawString("000", titleFont, drawBrush, bombPoint); }
             else { e.Graphics.DrawString(bombsLeft.ToString("000"), titleFont, drawBrush, bombPoint); }
 
-            if (gameLose || gameSelector.index == -1) { e.Graphics.DrawRectangle(drawPen, restartBlock.X, restartBlock.Y, 30, 30); gameSelector.index = -1; }
+            if (gameLose || gameSelector.index == -1 || gameWin) { e.Graphics.DrawRectangle(drawPen, restartBlock.X, restartBlock.Y, 30, 30); gameSelector.index = -1; }
             else { e.Graphics.DrawRectangle(drawPen, blocks[gameSelector.index].x, blocks[gameSelector.index].y, blocks[gameSelector.index].size, blocks[gameSelector.index].size); }
         }
 
@@ -398,8 +416,21 @@ namespace MineSweeper
         {
             gameWatch.Stop();
 
-            score = 5000 - gameTime - moves;
-            Form1.scores.Add(score.ToString());
+            switch (Form1.difficulty)
+            {
+                case "easy":
+                    score = 1000 - gameTime - moves;
+                    if (score < 25) { score = 25; }
+                    break;
+                case "medium":
+                    score = 2000 - gameTime - moves;
+                    if (score < 50) { score = 50; }
+                    break;
+                case "hard":
+                    score = 7000 - gameTime - moves;
+                    if (score < 100) { score = 100; }
+                    break;
+            }
 
             DialogResult result = WinForm.Show();
 

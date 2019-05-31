@@ -18,7 +18,7 @@ namespace MineSweeper
         public ScoreScreen()
         {
             InitializeComponent();
-            Form1.scores.Sort();
+            Form1.scores = Form1.scores.OrderByDescending(x => x.points).ThenBy(y => y.name).ToList();
         }
 
         private void ScoreScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -35,11 +35,11 @@ namespace MineSweeper
         private void ScoreScreen_Paint(object sender, PaintEventArgs e)
         {
             Form1.DrawBorders(this.Height, this.Width, 20, e.Graphics);
-
-            int count = Form1.scores.Count();
-            for (int i = 1; i <= 6; i++)
+            
+            for (int i = 0; i < Form1.scores.Count(); i++)
             {
-                e.Graphics.DrawString(Form1.scores[count - i], titleFont, drawBrush, 50, 50 * i);
+                e.Graphics.DrawString(Form1.scores[i].name, titleFont, drawBrush, 50, 50 * i + 50);
+                e.Graphics.DrawString(Form1.scores[i].points.ToString(), titleFont, drawBrush, 150, 50 * i + 50);
             }
         }
     }

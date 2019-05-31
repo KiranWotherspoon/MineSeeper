@@ -201,6 +201,41 @@ namespace MineSweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;highscore&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;100&lt;/points&gt;
+        ///    &lt;name&gt;MEE&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;200&lt;/points&gt;
+        ///    &lt;name&gt;TOO&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;400&lt;/points&gt;
+        ///    &lt;name&gt;HOW&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;500&lt;/points&gt;
+        ///    &lt;name&gt;DYS&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;250&lt;/points&gt;
+        ///    &lt;name&gt;LOA&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///  &lt;score&gt;
+        ///    &lt;points&gt;329&lt;/points&gt;
+        ///    &lt;name&gt;CLO&lt;/name&gt;
+        ///  &lt;/score&gt;
+        ///&lt;/highscore&gt;.
+        /// </summary>
+        internal static string highScore {
+            get {
+                return ResourceManager.GetString("highScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap oneBlock {
@@ -227,36 +262,6 @@ namespace MineSweeper.Properties {
             get {
                 object obj = ResourceManager.GetObject("revealedBomb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-        ///&lt;highscore&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;100&lt;/points&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;150&lt;/points&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;200&lt;/points&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;350&lt;/points&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;120&lt;/points&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;125&lt;/points&gt;
-        ///  &lt;/score&gt;
-        ///&lt;/highscore&gt;
-        ///.
-        /// </summary>
-        internal static string Score {
-            get {
-                return ResourceManager.GetString("Score", resourceCulture);
             }
         }
         
