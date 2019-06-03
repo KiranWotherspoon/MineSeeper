@@ -22,6 +22,8 @@ namespace MineSweeper
             MenuScreen ms = new MenuScreen();
             Form f = this.FindForm();
             f.Controls.Add(ms);
+
+            LoadScores();
         }
 
         public static void ChangeScreen(UserControl uc, UserControl us)
@@ -44,7 +46,7 @@ namespace MineSweeper
             g.DrawImage(Properties.Resources.borderCorner, 0, height - border, border, border);
         }
 
-        public static void ReadScores()
+        public static void LoadScores()
         {
             XmlReader reader = XmlReader.Create("Resources/highScore.xml");
 

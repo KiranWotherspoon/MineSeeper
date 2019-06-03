@@ -32,8 +32,11 @@
             this.movesLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.scoreLabel = new System.Windows.Forms.Label();
-            this.continueButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
+            this.letterLabelOne = new System.Windows.Forms.Label();
+            this.letterLabelTwo = new System.Windows.Forms.Label();
+            this.letterLabelThree = new System.Windows.Forms.Label();
+            this.continueLabel = new System.Windows.Forms.Label();
+            this.exitLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -76,48 +79,73 @@
             this.scoreLabel.TabIndex = 3;
             this.scoreLabel.Text = "label4";
             // 
-            // continueButton
+            // letterLabelOne
             // 
-            this.continueButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.continueButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.continueButton.FlatAppearance.BorderSize = 5;
-            this.continueButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.continueButton.Font = new System.Drawing.Font("Sitka Small", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.continueButton.Location = new System.Drawing.Point(34, 230);
-            this.continueButton.Name = "continueButton";
-            this.continueButton.Size = new System.Drawing.Size(117, 46);
-            this.continueButton.TabIndex = 4;
-            this.continueButton.Text = "Go Again";
-            this.continueButton.UseVisualStyleBackColor = false;
-            this.continueButton.Click += new System.EventHandler(this.continueButton_Click);
-            this.continueButton.Enter += new System.EventHandler(this.continueButton_Enter);
-            this.continueButton.Leave += new System.EventHandler(this.continueButton_Leave_1);
+            this.letterLabelOne.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.letterLabelOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.letterLabelOne.Location = new System.Drawing.Point(50, 199);
+            this.letterLabelOne.Name = "letterLabelOne";
+            this.letterLabelOne.Size = new System.Drawing.Size(69, 75);
+            this.letterLabelOne.TabIndex = 6;
+            this.letterLabelOne.Text = "A";
             // 
-            // exitButton
+            // letterLabelTwo
             // 
-            this.exitButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.exitButton.FlatAppearance.BorderSize = 5;
-            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Font = new System.Drawing.Font("Sitka Small", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(168, 230);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(100, 46);
-            this.exitButton.TabIndex = 5;
-            this.exitButton.Text = "Exit";
-            this.exitButton.UseVisualStyleBackColor = false;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
-            this.exitButton.Enter += new System.EventHandler(this.exitButton_Enter_1);
-            this.exitButton.Leave += new System.EventHandler(this.exitButton_Leave_1);
+            this.letterLabelTwo.BackColor = System.Drawing.Color.DarkGray;
+            this.letterLabelTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.letterLabelTwo.Location = new System.Drawing.Point(125, 199);
+            this.letterLabelTwo.Name = "letterLabelTwo";
+            this.letterLabelTwo.Size = new System.Drawing.Size(69, 75);
+            this.letterLabelTwo.TabIndex = 7;
+            this.letterLabelTwo.Text = "A";
+            // 
+            // letterLabelThree
+            // 
+            this.letterLabelThree.BackColor = System.Drawing.Color.DarkGray;
+            this.letterLabelThree.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.letterLabelThree.Location = new System.Drawing.Point(200, 199);
+            this.letterLabelThree.Name = "letterLabelThree";
+            this.letterLabelThree.Size = new System.Drawing.Size(69, 75);
+            this.letterLabelThree.TabIndex = 8;
+            this.letterLabelThree.Text = "label4";
+            // 
+            // continueLabel
+            // 
+            this.continueLabel.AutoSize = true;
+            this.continueLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.continueLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.continueLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.continueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.continueLabel.Location = new System.Drawing.Point(12, 292);
+            this.continueLabel.Name = "continueLabel";
+            this.continueLabel.Size = new System.Drawing.Size(138, 35);
+            this.continueLabel.TabIndex = 9;
+            this.continueLabel.Text = "Go Again";
+            // 
+            // exitLabel
+            // 
+            this.exitLabel.AutoSize = true;
+            this.exitLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.exitLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.exitLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitLabel.Location = new System.Drawing.Point(205, 292);
+            this.exitLabel.Name = "exitLabel";
+            this.exitLabel.Size = new System.Drawing.Size(66, 35);
+            this.exitLabel.TabIndex = 10;
+            this.exitLabel.Text = "Exit";
             // 
             // WinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(300, 310);
-            this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.continueButton);
+            this.ClientSize = new System.Drawing.Size(300, 340);
+            this.Controls.Add(this.exitLabel);
+            this.Controls.Add(this.continueLabel);
+            this.Controls.Add(this.letterLabelThree);
+            this.Controls.Add(this.letterLabelTwo);
+            this.Controls.Add(this.letterLabelOne);
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.movesLabel);
@@ -126,6 +154,7 @@
             this.Name = "WinForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "WinForm";
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.WinForm_PreviewKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,7 +166,10 @@
         private System.Windows.Forms.Label movesLabel;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Label scoreLabel;
-        private System.Windows.Forms.Button continueButton;
-        private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Label letterLabelOne;
+        private System.Windows.Forms.Label letterLabelTwo;
+        private System.Windows.Forms.Label letterLabelThree;
+        private System.Windows.Forms.Label continueLabel;
+        private System.Windows.Forms.Label exitLabel;
     }
 }

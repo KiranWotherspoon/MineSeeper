@@ -117,7 +117,8 @@ namespace MineSweeper
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
-            {gameWatch.Stop();
+            {
+                gameWatch.Stop();
 
                 DialogResult result = PauseForm.Show();
 
