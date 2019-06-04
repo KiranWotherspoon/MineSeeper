@@ -15,10 +15,16 @@ namespace MineSweeper
         Font titleFont = new Font("Arial", 24);
         SolidBrush drawBrush = new SolidBrush(Color.Red);
 
+        List<Label> pointLabels = new List<Label>();
+        List<Label> nameLabels = new List<Label>();
+
         public ScoreScreen()
         {
             InitializeComponent();
             Form1.scores = Form1.scores.OrderByDescending(x => x.points).ThenBy(y => y.name).ToList();
+
+            pointLabels.Add(pointLabel1); pointLabels.Add(pointLabel2); pointLabels.Add(pointLabel3); pointLabels.Add(pointLabel4); pointLabels.Add(pointLabel5); pointLabels.Add(pointLabel6);
+            nameLabels.Add(nameLabel1); nameLabels.Add(nameLabel2); nameLabels.Add(nameLabel3); nameLabels.Add(nameLabel4); nameLabels.Add(nameLabel5); nameLabels.Add(nameLabel6);
         }
 
         private void ScoreScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -35,11 +41,11 @@ namespace MineSweeper
         private void ScoreScreen_Paint(object sender, PaintEventArgs e)
         {
             Form1.DrawBorders(this.Height, this.Width, 20, e.Graphics);
-            
+
             for (int i = 0; i < Form1.scores.Count(); i++)
             {
-                e.Graphics.DrawString(Form1.scores[i].name, titleFont, drawBrush, 50, 50 * i + 50);
-                e.Graphics.DrawString(Form1.scores[i].points.ToString(), titleFont, drawBrush, 150, 50 * i + 50);
+                pointLabels[i].Text = Form1.scores[i].points.ToString();
+                nameLabels[i].Text = Form1.scores[i].name;
             }
         }
     }

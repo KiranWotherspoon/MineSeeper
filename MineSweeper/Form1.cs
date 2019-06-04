@@ -66,7 +66,23 @@ namespace MineSweeper
                 }
             }
 
-            reader.Dispose();
+            reader.Close();
+        }
+
+        public static void SaveScores ()
+        {
+            XmlWriter writer = XmlWriter.Create("Resources/highScore.xml");
+
+            writer.WriteStartElement("highscore");
+            for (int i = 0; i < 6; i++)
+            {
+                writer.WriteStartElement("score");
+                writer.WriteElementString("points", scores[i].points.ToString());
+                writer.WriteElementString("name", scores[i].name.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+            writer.Close();
         }
     }
 }

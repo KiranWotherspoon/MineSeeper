@@ -48,7 +48,7 @@ namespace MineSweeper
             }
             else
             {
-                //Form1.SaveScores();
+                Form1.SaveScores();
                 Application.Exit();
             }
         }
