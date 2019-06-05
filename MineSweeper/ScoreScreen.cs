@@ -42,7 +42,7 @@ namespace MineSweeper
         {
             Form1.DrawBorders(this.Height, this.Width, 20, e.Graphics);
 
-            for (int i = 0; i < Form1.scores.Count(); i++)
+            for (int i = 0; i < pointLabels.Count(); i++)
             {
                 pointLabels[i].Text = Form1.scores[i].points.ToString();
                 nameLabels[i].Text = Form1.scores[i].name;

@@ -35,6 +35,9 @@
             this.easyButton = new System.Windows.Forms.Button();
             this.mediumButton = new System.Windows.Forms.Button();
             this.hardButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -152,11 +155,41 @@
             this.hardButton.Enter += new System.EventHandler(this.hardButton_Enter);
             this.hardButton.Leave += new System.EventHandler(this.hardButton_Leave);
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Location = new System.Drawing.Point(400, 230);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 60);
+            this.label2.TabIndex = 17;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Location = new System.Drawing.Point(50, 120);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 60);
+            this.label3.TabIndex = 18;
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(350, 360);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 60);
+            this.label4.TabIndex = 19;
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // MenuScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.hardButton);
             this.Controls.Add(this.mediumButton);
             this.Controls.Add(this.easyButton);
@@ -181,5 +214,8 @@
         private System.Windows.Forms.Button easyButton;
         private System.Windows.Forms.Button mediumButton;
         private System.Windows.Forms.Button hardButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

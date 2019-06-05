@@ -184,4 +184,13 @@
   <data name="highScore" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\Resources\highScore.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="ARA_ARA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ARA ARA.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="biggerTheyAre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\biggerTheyAre.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="wheeze" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wheeze.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

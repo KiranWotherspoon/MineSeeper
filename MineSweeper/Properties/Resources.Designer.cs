@@ -61,6 +61,24 @@ namespace MineSweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream ARA_ARA {
+            get {
+                return ResourceManager.GetStream("ARA_ARA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream biggerTheyAre {
+            get {
+                return ResourceManager.GetStream("biggerTheyAre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap blankBlock {
@@ -201,33 +219,7 @@ namespace MineSweeper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;highscore&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;100&lt;/points&gt;
-        ///    &lt;name&gt;MEE&lt;/name&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;200&lt;/points&gt;
-        ///    &lt;name&gt;TOO&lt;/name&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;400&lt;/points&gt;
-        ///    &lt;name&gt;HOW&lt;/name&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;500&lt;/points&gt;
-        ///    &lt;name&gt;DYS&lt;/name&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;250&lt;/points&gt;
-        ///    &lt;name&gt;LOA&lt;/name&gt;
-        ///  &lt;/score&gt;
-        ///  &lt;score&gt;
-        ///    &lt;points&gt;329&lt;/points&gt;
-        ///    &lt;name&gt;CLO&lt;/name&gt;
-        ///  &lt;/score&gt;
-        ///&lt;/highscore&gt;.
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;highscore&gt;&lt;score&gt;&lt;points&gt;753&lt;/points&gt;&lt;name&gt;MAN&lt;/name&gt;&lt;/score&gt;&lt;score&gt;&lt;points&gt;738&lt;/points&gt;&lt;name&gt;ACX&lt;/name&gt;&lt;/score&gt;&lt;score&gt;&lt;points&gt;734&lt;/points&gt;&lt;name&gt;KAA&lt;/name&gt;&lt;/score&gt;&lt;score&gt;&lt;points&gt;10&lt;/points&gt;&lt;name&gt;HOW&lt;/name&gt;&lt;/score&gt;&lt;score&gt;&lt;points&gt;9&lt;/points&gt;&lt;name&gt;DYM&lt;/name&gt;&lt;/score&gt;&lt;score&gt;&lt;points&gt;8&lt;/points&gt;&lt;name&gt;LAD&lt;/name&gt;&lt;/score&gt;&lt;/highscore&gt;.
         /// </summary>
         internal static string highScore {
             get {
@@ -302,6 +294,15 @@ namespace MineSweeper.Properties {
             get {
                 object obj = ResourceManager.GetObject("twoBlock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream wheeze {
+            get {
+                return ResourceManager.GetStream("wheeze", resourceCulture);
             }
         }
     }

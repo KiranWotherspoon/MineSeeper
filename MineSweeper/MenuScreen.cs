@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace MineSweeper
 {
@@ -138,6 +139,24 @@ namespace MineSweeper
         private void exitButton_Leave(object sender, EventArgs e)
         {
             exitButton.BackColor = Color.Gainsboro;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            SoundPlayer player = new SoundPlayer(Properties.Resources.biggerTheyAre);
+            player.Play();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            SoundPlayer player = new SoundPlayer(Properties.Resources.wheeze);
+            player.Play();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            SoundPlayer player = new SoundPlayer(Properties.Resources.ARA_ARA);
+            player.Play();
         }
     }
 }

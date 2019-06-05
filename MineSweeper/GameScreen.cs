@@ -209,7 +209,6 @@ namespace MineSweeper
                         {
                             blocks[gameSelector.index].flag = false;
                             bombsLeft++;
-                            moves++;
                         }
                         else
                         {
@@ -227,7 +226,6 @@ namespace MineSweeper
                         blocks[gameSelector.index].flag = true;
                         bombsLeft--;
                     }
-                    moves++;
                     Refresh();
                     break;
             }
