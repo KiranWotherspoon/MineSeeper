@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Media;
 
 namespace MineSweeper
 {
@@ -30,6 +31,8 @@ namespace MineSweeper
 
         selector gameSelector = new selector(0);
         Point restartBlock, timerPoint, bombPoint;
+
+        SoundPlayer player = new SoundPlayer(Properties.Resources.wahaha);
 
         Random rng = new Random();
         #endregion
@@ -174,6 +177,7 @@ namespace MineSweeper
                     }
                     else if (blocks[gameSelector.index].bomb)
                     {
+                        player.Play();
                         gameLose = true;
                         gameWatch.Stop();
                         moves++;

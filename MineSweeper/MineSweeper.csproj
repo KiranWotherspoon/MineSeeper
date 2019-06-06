@@ -195,10 +195,16 @@
     <None Include="bin\Debug\Resources\highScore.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\wheeze.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wahaha.wav" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\biggerTheyAre.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\wheeze.wav" />
+    <None Include="Resources\ora ora.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ARA ARA.wav" />

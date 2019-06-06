@@ -158,5 +158,11 @@ namespace MineSweeper
             SoundPlayer player = new SoundPlayer(Properties.Resources.ARA_ARA);
             player.Play();
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            SoundPlayer player = new SoundPlayer(Properties.Resources.ora_ora);
+            player.Play();
+        }
     }
 }

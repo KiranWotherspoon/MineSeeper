@@ -238,6 +238,15 @@ namespace MineSweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream ora_ora {
+            get {
+                return ResourceManager.GetStream("ora_ora", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap restartButton {
@@ -294,6 +303,15 @@ namespace MineSweeper.Properties {
             get {
                 object obj = ResourceManager.GetObject("twoBlock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream wahaha {
+            get {
+                return ResourceManager.GetStream("wahaha", resourceCulture);
             }
         }
         
