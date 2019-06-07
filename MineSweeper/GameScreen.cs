@@ -41,6 +41,7 @@ namespace MineSweeper
         {
             InitializeComponent();
 
+            //based on the difficulty change how game is setup
             switch (Form1.difficulty)
             {
                 case "easy":
@@ -53,29 +54,32 @@ namespace MineSweeper
                     HardStart();
                     break;
             }
+            //moves the timer to it's correct position
+            timerLabel.Location = timerPoint;
+            //resets tracking variables
+            moves = 0;
+            firstClick = true;
+            //creates all the block objects
+            CreateBlocks(blockSize, rowLength);
+            //start the game timer
             gameTimer.Enabled = true;
         }
 
         #region Start Functions
         private void EasyStart()
         {
+            //sets the values that difer based on game difficulty
             blockSize = 50;
             rowLength = 9;
             bombNumber = bombsLeft = 16;
             border = (this.Width - (rowLength * blockSize)) / 2;
 
+            //sets points used in drawing that change based on difficulty
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2 + 15);
             timerPoint = new Point(this.Width - border - 66, border + 3);
             bombPoint = new Point(border + 3, border + 3);
-
-            timerLabel.Location = timerPoint;
-
-            CreateBlocks(blockSize, rowLength);
-
-            moves = 0;
-            firstClick = true;
         }
-
+        //same as easy but medium
         private void MediumStart()
         {
             blockSize = 30;
@@ -86,16 +90,8 @@ namespace MineSweeper
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
             timerPoint = new Point(this.Width - border - 66, border + 3);
             bombPoint = new Point(border + 3, border + 3);
-
-            timerLabel.Location = timerPoint;
-
-            CreateBlocks(blockSize, rowLength);
-
-
-            moves = 0;
-            firstClick = true;
         }
-
+        //same as medium but hard
         public void HardStart()
         {
             blockSize = 20;
@@ -106,19 +102,12 @@ namespace MineSweeper
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
             timerPoint = new Point(this.Width - border - 66, border + 3);
             bombPoint = new Point(border + 3, border + 3);
-
-            timerLabel.Location = timerPoint;
-
-            CreateBlocks(blockSize, rowLength);
-
-
-            moves = 0;
-            firstClick = true;
         }
         #endregion
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            //pause function
             if (e.KeyCode == Keys.Escape)
             {
                 gameWatch.Stop();
@@ -138,6 +127,7 @@ namespace MineSweeper
 
             switch (e.KeyCode)
             {
+                //moves the selector based on inputs
                 case Keys.Right:
                     gameSelector.Move("right", blocks);
                     Refresh();
@@ -154,7 +144,9 @@ namespace MineSweeper
                     gameSelector.Move("down", blocks);
                     Refresh();
                     break;
+                    //reveals the selected block
                 case Keys.Enter:
+                    //resets the game
                     if (gameSelector.index == -1)
                     {
                         gameLose = false;
@@ -166,27 +158,38 @@ namespace MineSweeper
                         moves = 0;
                         firstClick = true;
                     }
+                    //only happens on the first selection the player makes
                     else if (firstClick)
                     {
+                        //starts the timer
                         gameWatch.Start();
-                        firstClick = false;
                         moves++;
+                        //creates all bombs and the next to number
                         CreateBombs(bombNumber, gameSelector.index);
                         CreateNextTo();
+                        //reveals the selected block
                         blocks[gameSelector.index].Reveal(gameSelector.index, blocks);
+                        //ensures this function doesn't happen again this game
+                        firstClick = false;
                     }
+                    //when the player reveals a bomb
                     else if (blocks[gameSelector.index].bomb)
                     {
+                        //play the death sound effect, stop the timer, set the game loss variable to true
                         player.Play();
                         gameLose = true;
                         gameWatch.Stop();
                         moves++;
+                        //reveal the selected block
                         blocks[gameSelector.index].revealed = true;
                     }
+                    //when the player reveals a block, they can't reveal a flagged block
                     else if (blocks[gameSelector.index].flag == false)
                     {
+                        //reveal the block
                         blocks[gameSelector.index].Reveal(gameSelector.index, blocks);
                         moves++;
+                        //check to see if all the blocks that aren't bombs are revealed
                         bool winGame = true;
                         foreach (block b in blocks)
                         {
@@ -195,6 +198,7 @@ namespace MineSweeper
                                 winGame = false;
                             }
                         }
+                        //if the are the player wins the game
                         if (winGame)
                         {
                             gameWin = true;
@@ -202,34 +206,27 @@ namespace MineSweeper
                             GameWin();
                         }
                     }
+                    //redraw the screen
                     Refresh();
                     break;
                 case Keys.Space:
-                    if (gameSelector.index == -1) { }
-                    else if (firstClick && gameSelector.index != -1)
+                    //do nothing if this is the first selection of the game
+                    if (firstClick) { }
+                    //if the player selects an already flagged block
+                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag)
                     {
-                        gameWatch.Start();
-                        if (blocks[gameSelector.index].flag)
-                        {
-                            blocks[gameSelector.index].flag = false;
-                            bombsLeft++;
-                        }
-                        else
-                        {
-                            blocks[gameSelector.index].flag = true;
-                            bombsLeft--;
-                        }
-                    }
-                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag && gameSelector.index != -1)
-                    {
+                        //unflag the block and increase the displayed number of bombs left
                         blocks[gameSelector.index].flag = false;
                         bombsLeft++;
                     }
-                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag == false && gameSelector.index != -1)
+                    //if the player selects a block that isn't flaged or revealed
+                    else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag == false)
                     {
+                        //flag the block and decrease the displayed number of bombs left
                         blocks[gameSelector.index].flag = true;
                         bombsLeft--;
                     }
+                    //redraw the screen
                     Refresh();
                     break;
             }
@@ -237,6 +234,7 @@ namespace MineSweeper
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            //displays the time the game has taken
             gameTime = Convert.ToInt32(gameWatch.ElapsedMilliseconds) / 1000;
             timerLabel.Text = gameTime.ToString("000");
             timerLabel.Refresh();
@@ -244,15 +242,23 @@ namespace MineSweeper
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            //draws the border around the screen
             Form1.DrawBorders(this.Height, this.Width, border, e.Graphics);
 
+            //draw each block
             foreach (block b in blocks)
             {
+                //if it's a bomb and revealed draw a bomb
                 if (b.bomb && b.revealed) { e.Graphics.DrawImage(Properties.Resources.revealedBomb, b.x, b.y, b.size, b.size); }
+                //if the game is lost and it's a flagged bomb, draw a flag
                 else if (gameLose && b.bomb && b.flag) { e.Graphics.DrawImage(Properties.Resources.flagBlock, b.x, b.y, b.size, b.size); }
+                //if the game is lost and it's been mis-flagged, draw a false bomb
                 else if (gameLose && b.flag && b.bomb == false) { e.Graphics.DrawImage(Properties.Resources.falseBomb, b.x, b.y, b.size, b.size); }
+                //if it is flagged, draw a flag
                 else if (b.flag) { e.Graphics.DrawImage(Properties.Resources.flagBlock, b.x, b.y, b.size, b.size); }
+                //if the game is lost and it is a bomb, draw a bomb
                 else if (gameLose && b.bomb) { e.Graphics.DrawImage(Properties.Resources.bombBlock, b.x, b.y, b.size, b.size); }
+                //if it is revealed, draw the block with the correct next to number on it
                 else if (b.revealed)
                 {
                     switch (b.nextTo)
@@ -288,22 +294,24 @@ namespace MineSweeper
                             break;
                     }
                 }
+                //if it's not revealed, draw a regular block
                 else if (b.revealed == false) { e.Graphics.DrawImage(Properties.Resources.block, b.x, b.y, b.size, b.size); }
             }
-
+            //draw the restart button
             e.Graphics.DrawImage(Properties.Resources.restartButton, restartBlock.X, restartBlock.Y, 30, 30);
-
+            //draw the displayed number of bombs left
             drawBrush.Color = Color.Black;
             e.Graphics.FillRectangle(drawBrush, bombPoint.X, bombPoint.Y, 63, 33);
             drawBrush.Color = Color.Red;
             if (bombsLeft <= 0) { e.Graphics.DrawString("000", titleFont, drawBrush, bombPoint); }
             else { e.Graphics.DrawString(bombsLeft.ToString("000"), titleFont, drawBrush, bombPoint); }
-
+            //draw the selector
             if (gameLose || gameSelector.index == -1 || gameWin) { e.Graphics.DrawRectangle(drawPen, restartBlock.X, restartBlock.Y, 30, 30); gameSelector.index = -1; }
             else { e.Graphics.DrawRectangle(drawPen, blocks[gameSelector.index].x, blocks[gameSelector.index].y, blocks[gameSelector.index].size, blocks[gameSelector.index].size); }
         }
 
         #region Block Setup
+        //creates the blocks based on the given row and column length
         private void CreateBlocks(int size, int length)
         {
             for (int y = 0; y < length; y++)
@@ -315,7 +323,7 @@ namespace MineSweeper
                 }
             }
         }
-
+        //creates all the bombs, making sure that the given block and all the blocks around it aren't turned into a bomb
         private void CreateBombs(int number, int startBlock)
         {
             //create the number of bombs specified
@@ -365,12 +373,11 @@ namespace MineSweeper
                         }
                     }
                 }
-
-                //turn the block into a bomb
+                //turn the selected block into a bomb
                 blocks[index].bomb = true;
             }
         }
-
+        //create the number that shows how many bombs all blocks are adjacent to
         private void CreateNextTo()
         {
             //find out how many bombs each block is beside while following the grid pattern
@@ -417,8 +424,10 @@ namespace MineSweeper
 
         private void GameWin ()
         {
+            //stop the game timer
             gameWatch.Stop();
 
+            //based on the difficulty calculated the score
             switch (Form1.difficulty)
             {
                 case "easy":
@@ -435,6 +444,7 @@ namespace MineSweeper
                     break;
             }
 
+            //do a pause dialog thingy but its not a puase its the win screen, so that it allows the player to come straight back to the game screen and also see the game screen in the background
             DialogResult result = WinForm.Show();
 
             if (result == DialogResult.Cancel)

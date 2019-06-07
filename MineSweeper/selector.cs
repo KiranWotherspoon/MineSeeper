@@ -17,6 +17,7 @@ namespace MineSweeper
 
         public void Move(string direction, List<block> blocks)
         {
+            //move the selector in the given direction making sure that it follows the grid pattern
             switch (direction)
             {
                 case "left":

@@ -35,16 +35,17 @@ namespace MineSweeper
 
         public WinForm()
         {
+            InitializeComponent();
+
+            //change the information labels
+            WinLabels();
+            //set all the letters to A
             firstIndex = 0;
             secondIndex = 0;
             thirdIndex = 0;
-
-            InitializeComponent();
-            WinLabels();
         }
 
         public static DialogResult Show()
-
         {
             winForm = new WinForm();
             winForm.ShowDialog();
@@ -67,20 +68,19 @@ namespace MineSweeper
             }
 
             winForm.Close();
-
         }
 
         private void WinLabels ()
         {
+            //put all the game information in the labels
             movesLabel.Text = "Moves taken: " + GameScreen.moves;
             timeLabel.Text = "Time Taken: " + GameScreen.gameTime;
             scoreLabel.Text = "Total score: " + GameScreen.score;
-
-            letterLabelOne.Text = letterOne; letterLabelTwo.Text = letterTwo; letterLabelThree.Text = letterThree;
         }
 
         private void LabelFocus ()
         {
+            //change the back colour of all labels to correctly show which one is selected
             letterLabelOne.BackColor = Color.DarkGray;
             letterLabelTwo.BackColor = Color.DarkGray;
             letterLabelThree.BackColor = Color.DarkGray;
@@ -111,6 +111,7 @@ namespace MineSweeper
 
         private void WinForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            //changes the label in focus, the letters for the name, exits out of the screen
             switch (e.KeyCode)
             {
                 case Keys.Right:

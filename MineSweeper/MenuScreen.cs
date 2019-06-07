@@ -23,18 +23,21 @@ namespace MineSweeper
 
         private void MenuScreen_Paint(object sender, PaintEventArgs e)
         {
+            //draw the form border
             Form1.DrawBorders(this.Height, this.Width, 20, e.Graphics);
 
+            //draw the images so the screen isnt blank
             e.Graphics.DrawImage(Properties.Resources.bombBlock, 50, 120, 60, 60);
             e.Graphics.DrawImage(Properties.Resources.flagBlock, 400, 230, 60, 60);
-            e.Graphics.DrawImage(Properties.Resources.oneBlock, 350, 360, 60, 60);
-            e.Graphics.DrawImage(Properties.Resources.twoBlock, 100, 400, 60, 60);
+            e.Graphics.DrawImage(Properties.Resources.oneBlock, 385, 360, 60, 60);
+            e.Graphics.DrawImage(Properties.Resources.twoBlock, 75, 420, 60, 60);
             e.Graphics.DrawImage(Properties.Resources.eightBlock, 70, 270, 60, 60);
             e.Graphics.DrawImage(Properties.Resources.falseBomb, 420, 30, 60, 60);
         }
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            //when the player clicks play show a difficulty selection
             playButton.Visible = scoreButton.Visible = false;
             easyButton.Visible = mediumButton.Visible = hardButton.Visible = true;
             easyButton.Focus();

@@ -107,7 +107,7 @@
             this.letterLabelThree.Name = "letterLabelThree";
             this.letterLabelThree.Size = new System.Drawing.Size(69, 75);
             this.letterLabelThree.TabIndex = 8;
-            this.letterLabelThree.Text = "label4";
+            this.letterLabelThree.Text = "A";
             // 
             // continueLabel
             // 
