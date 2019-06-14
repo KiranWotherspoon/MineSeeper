@@ -194,7 +194,7 @@ namespace MineSweeper
                         firstClick = false;
                     }
                     //when the player reveals a bomb
-                    else if (blocks[gameSelector.index].bomb)
+                    else if (blocks[gameSelector.index].bomb && blocks[gameSelector.index].flag == false)
                     {
                         //play the death sound effect, stop the timer, set the game loss variable to true
                         player.Play();
@@ -233,7 +233,7 @@ namespace MineSweeper
                     break;
                 case Keys.Space:
                     //do nothing if this is the first selection of the game
-                    if (firstClick) { }
+                    if (firstClick || gameSelector.index == -1) { }
                     //if the player selects an already flagged block
                     else if (blocks[gameSelector.index].revealed == false && blocks[gameSelector.index].flag)
                     {
