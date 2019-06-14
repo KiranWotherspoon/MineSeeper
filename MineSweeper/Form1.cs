@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
+//Classic Minesweeper
+//Kiran Wotherspoon
+//2019 June 14
+
 namespace MineSweeper
 {
     public partial class Form1 : Form
@@ -53,7 +57,7 @@ namespace MineSweeper
                 default:
                     break;
             }
-            ns.Location = new Point((f.Width - ns.Width) / 2, (f.Height - ns.Height) / 2); 
+            ns.Location = new Point((f.Width - ns.Width) / 2, (f.Height - ns.Height) / 2);
             f.Controls.Add(ns);
             ns.Focus();
         }
