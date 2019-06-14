@@ -39,6 +39,10 @@ namespace MineSweeper
 
             //change the information labels
             WinLabels();
+        }
+        
+        private void WinForm_Load(object sender, EventArgs e)
+        {
             //set all the letters to A
             firstIndex = 0;
             secondIndex = 0;
@@ -191,6 +195,7 @@ namespace MineSweeper
                         buttonResult = DialogResult.Abort;
                         winForm.Close();
                     }
+                    else { counter++; LabelFocus(); }
                     break;
             }
         }

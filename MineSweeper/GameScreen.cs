@@ -9,18 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Media;
+using System.Threading;
 
 namespace MineSweeper
 {
     public partial class GameScreen : UserControl
     {
         #region Global Values
-        bool gameLose, gameWin, firstClick;
+        bool gameWin, firstClick, gameLose;
 
         int bombNumber, bombsLeft;
         public static int blockSize, rowLength, border, moves, gameTime, score;
 
-        List<block> blocks = new List<block>();
+        public static List<block> blocks = new List<block>();
 
         Stopwatch gameWatch = new Stopwatch();
 
@@ -73,6 +74,12 @@ namespace MineSweeper
             rowLength = 9;
             bombNumber = bombsLeft = 16;
             border = (this.Width - (rowLength * blockSize)) / 2;
+            score = 0;
+            gameLose = false;
+            gameWin = false;
+
+            //clear the blocks just in case
+            blocks.Clear();
 
             //sets points used in drawing that change based on difficulty
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2 + 15);
@@ -86,6 +93,12 @@ namespace MineSweeper
             rowLength = 16;
             bombNumber = bombsLeft = 40;
             border = (this.Width - (rowLength * blockSize)) / 2;
+            score = 0;
+            gameLose = false;
+            gameWin = false;
+
+            //clear the blocks just in case
+            blocks.Clear();
 
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
             timerPoint = new Point(this.Width - border - 66, border + 3);
@@ -98,6 +111,12 @@ namespace MineSweeper
             rowLength = 24;
             bombNumber = bombsLeft = 99;
             border = (this.Width - (rowLength * blockSize)) / 2;
+            score = 0;
+            gameLose = false;
+            gameWin = false;
+
+            //clear the blocks just in case
+            blocks.Clear();
 
             restartBlock = new Point((this.Width - 2 * border) / 2 + 15, ((this.Height - 2 * border) - (blockSize * rowLength)) / 2);
             timerPoint = new Point(this.Width - border - 66, border + 3);
@@ -120,8 +139,8 @@ namespace MineSweeper
                 }
                 else if (result == DialogResult.Abort)
                 {
-                    MenuScreen ms = new MenuScreen();
-                    Form1.ChangeScreen(this, ms);
+                    Form1.ChangeScreen(this, "MenuScreen");
+                    this.Dispose();
                 }
             }
 
@@ -144,7 +163,7 @@ namespace MineSweeper
                     gameSelector.Move("down", blocks);
                     Refresh();
                     break;
-                    //reveals the selected block
+                //reveals the selected block
                 case Keys.Enter:
                     //resets the game
                     if (gameSelector.index == -1)
@@ -156,6 +175,7 @@ namespace MineSweeper
                         CreateBlocks(blockSize, rowLength);
                         gameWatch.Reset();
                         moves = 0;
+                        score = 0;
                         firstClick = true;
                     }
                     //only happens on the first selection the player makes
@@ -168,7 +188,8 @@ namespace MineSweeper
                         CreateBombs(bombNumber, gameSelector.index);
                         CreateNextTo();
                         //reveals the selected block
-                        blocks[gameSelector.index].Reveal(gameSelector.index, blocks);
+                        blocks[gameSelector.index].revealed = true;
+                        blocks[gameSelector.index].RevealSurroundings(gameSelector.index);
                         //ensures this function doesn't happen again this game
                         firstClick = false;
                     }
@@ -187,7 +208,8 @@ namespace MineSweeper
                     else if (blocks[gameSelector.index].flag == false)
                     {
                         //reveal the block
-                        blocks[gameSelector.index].Reveal(gameSelector.index, blocks);
+                        blocks[gameSelector.index].revealed = true;
+                        blocks[gameSelector.index].RevealSurroundings(gameSelector.index);
                         moves++;
                         //check to see if all the blocks that aren't bombs are revealed
                         bool winGame = true;
@@ -198,12 +220,12 @@ namespace MineSweeper
                                 winGame = false;
                             }
                         }
-                        //if the are the player wins the game
+                        //if they are the player wins the game
                         if (winGame)
                         {
                             gameWin = true;
                             Refresh();
-                            GameWin();
+                            WinGame();
                         }
                     }
                     //redraw the screen
@@ -422,39 +444,32 @@ namespace MineSweeper
         }
         #endregion
 
-        private void GameWin ()
+        private void WinGame()
         {
             //stop the game timer
             gameWatch.Stop();
 
             //based on the difficulty calculated the score
-            switch (Form1.difficulty)
+            foreach (block b in blocks)
             {
-                case "easy":
-                    score = 1000 - gameTime - moves;
-                    if (score < 25) { score = 25; }
-                    break;
-                case "medium":
-                    score = 2000 - gameTime - moves;
-                    if (score < 50) { score = 50; }
-                    break;
-                case "hard":
-                    score = 7000 - gameTime - moves;
-                    if (score < 100) { score = 100; }
-                    break;
+                if (b.bomb && b.flag)
+                {
+                    score += 50;
+                }
             }
+            score -= gameTime;
+            score += 1000;
 
-            //do a pause dialog thingy but its not a puase its the win screen, so that it allows the player to come straight back to the game screen and also see the game screen in the background
+            //do a pause dialog thingy but its not a puase its the win screen
             DialogResult result = WinForm.Show();
 
             if (result == DialogResult.Cancel)
             {
-               
+
             }
             else if (result == DialogResult.Abort)
             {
-                MenuScreen ms = new MenuScreen();
-                Form1.ChangeScreen(this, ms);
+                Form1.ChangeScreen(this, "MenuScreen");
             }
         }
     }

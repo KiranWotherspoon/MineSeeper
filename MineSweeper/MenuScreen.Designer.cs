@@ -163,7 +163,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 60);
             this.label2.TabIndex = 17;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -172,7 +171,6 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 60);
             this.label3.TabIndex = 18;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -181,7 +179,6 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 60);
             this.label4.TabIndex = 19;
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -190,7 +187,6 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 60);
             this.label5.TabIndex = 20;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // MenuScreen
             // 

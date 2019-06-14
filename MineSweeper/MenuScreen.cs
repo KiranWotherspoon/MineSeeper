@@ -13,8 +13,6 @@ namespace MineSweeper
 {
     public partial class MenuScreen : UserControl
     {
-        Random rng = new Random();
-
         public MenuScreen()
         {
             InitializeComponent();
@@ -23,7 +21,7 @@ namespace MineSweeper
 
         private void MenuScreen_Paint(object sender, PaintEventArgs e)
         {
-            //draw the form border
+            //draw the border
             Form1.DrawBorders(this.Height, this.Width, 20, e.Graphics);
 
             //draw the images so the screen isnt blank
@@ -45,45 +43,47 @@ namespace MineSweeper
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            //if on the difficult selection go back to regular main menu
             if (easyButton.Visible)
             {
                 playButton.Visible = scoreButton.Visible = true;
                 easyButton.Visible = mediumButton.Visible = hardButton.Visible = false;
             }
+            //exit the game
             else
             {
                 Form1.SaveScores();
                 Application.Exit();
             }
         }
-
+        //change to the appropriate screen
+        #region Change Screens
         private void scoreButton_Click(object sender, EventArgs e)
         {
-            ScoreScreen ss = new ScoreScreen();
-            Form1.ChangeScreen(this, ss);
+            Form1.ChangeScreen(this, "ScoreScreen");
         }
 
         private void easyButton_Click(object sender, EventArgs e)
         {
             Form1.difficulty = "easy";
-            GameScreen gs = new GameScreen();
-            Form1.ChangeScreen(this, gs);
+            Form1.ChangeScreen(this, "GameScreen");
         }
 
         private void mediumButton_Click(object sender, EventArgs e)
         {
             Form1.difficulty = "medium";
-            GameScreen gs = new GameScreen();
-            Form1.ChangeScreen(this, gs);
+            Form1.ChangeScreen(this, "GameScreen");
         }
 
         private void hardButton_Click(object sender, EventArgs e)
         {
             Form1.difficulty = "hard";
-            GameScreen gs = new GameScreen();
-            Form1.ChangeScreen(this, gs);
+            Form1.ChangeScreen(this, "GameScreen");
         }
+        #endregion
 
+        //Changes the back colours of the buttons when hovered
+        #region Change Backcolours
         private void easyButton_Enter(object sender, EventArgs e)
         {
             easyButton.BackColor = Color.Gray;
@@ -143,29 +143,6 @@ namespace MineSweeper
         {
             exitButton.BackColor = Color.Gainsboro;
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            SoundPlayer player = new SoundPlayer(Properties.Resources.biggerTheyAre);
-            player.Play();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            SoundPlayer player = new SoundPlayer(Properties.Resources.wheeze);
-            player.Play();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-            SoundPlayer player = new SoundPlayer(Properties.Resources.ARA_ARA);
-            player.Play();
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-            SoundPlayer player = new SoundPlayer(Properties.Resources.ora_ora);
-            player.Play();
-        }
+        #endregion
     }
 }

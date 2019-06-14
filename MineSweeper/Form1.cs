@@ -19,21 +19,46 @@ namespace MineSweeper
         public Form1()
         {
             InitializeComponent();
-            MenuScreen ms = new MenuScreen();
-            Form f = this.FindForm();
-            f.Controls.Add(ms);
 
+            //load scores on program start
             LoadScores();
         }
 
-        public static void ChangeScreen(UserControl uc, UserControl us)
+        //start with the menu screen on the form
+        private void Form1_Load(object sender, EventArgs e)
         {
-            Form f = ActiveForm.FindForm();
-            f.Controls.Remove(uc);
-            f.Controls.Add(us);
-            us.Focus();
+            MenuScreen ms = new MenuScreen();
+            ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
+            Form f = this.FindForm();
+            f.Controls.Add(ms);
         }
 
+        //changes the usercontrol on the form and centers it
+        public static void ChangeScreen(UserControl current, string next)
+        {
+            Form f = ActiveForm.FindForm();
+            f.Controls.Remove(current);
+            UserControl ns = null;
+            switch (next)
+            {
+                case "MenuScreen":
+                    ns = new MenuScreen();
+                    break;
+                case "GameScreen":
+                    ns = new GameScreen();
+                    break;
+                case "ScoreScreen":
+                    ns = new ScoreScreen();
+                    break;
+                default:
+                    break;
+            }
+            ns.Location = new Point((f.Width - ns.Width) / 2, (f.Height - ns.Height) / 2); 
+            f.Controls.Add(ns);
+            ns.Focus();
+        }
+
+        //function to draw borders of any screen
         public static void DrawBorders(int height, int width, int border, Graphics g)
         {
             g.DrawImage(Properties.Resources.border, 0, 0, border, height);
@@ -46,6 +71,7 @@ namespace MineSweeper
             g.DrawImage(Properties.Resources.borderCorner, 0, height - border, border, border);
         }
 
+        //loads the score from an xml
         public static void LoadScores()
         {
             XmlReader reader = XmlReader.Create("Resources/highScore.xml");
@@ -69,7 +95,8 @@ namespace MineSweeper
             reader.Close();
         }
 
-        public static void SaveScores ()
+        //saves the score to an xml
+        public static void SaveScores()
         {
             XmlWriter writer = XmlWriter.Create("Resources/highScore.xml");
 

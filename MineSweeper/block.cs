@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MineSweeper
 {
-    class block
+    public class block
     {
         public int x, y, size, nextTo;
         public bool bomb, revealed, flag;
@@ -22,50 +22,56 @@ namespace MineSweeper
             flag = _flag;
         }
 
-        public void Reveal(int index, List<block> blocks)
+        //check if the given block has any bombs around it, if it doesn't reveal all of the blocks around it, and then call this method on those revealed blocks
+        #region Reveal Block
+        public void RevealSurroundings(int index)
         {
-            //if the block isn't revealed, reveal it
-            if (revealed == false)
-            {
-                revealed = true;
-            }
-
-            //if the block has no bombs next to it (and isn't a bomb itself), reveal all the blocks around it HOWEVER, don't reveal blocks that are flagged
-            if (nextTo == 0 && bomb == false)
+            if (nextTo == 0)
             {
                 if (index >= GameScreen.rowLength)
                 {
                     if (index % GameScreen.rowLength != 0)
                     {
-                        if (blocks[index - GameScreen.rowLength - 1].flag == false) { blocks[index - GameScreen.rowLength - 1].revealed = true; }
+                        if (GameScreen.blocks[index - GameScreen.rowLength - 1].flag == false && GameScreen.blocks[index - GameScreen.rowLength - 1].revealed == false) { GameScreen.blocks[index - GameScreen.rowLength - 1].CheckNextTo(index - GameScreen.rowLength - 1); }
                     }
-                    if (blocks[index - GameScreen.rowLength].flag == false) { blocks[index - GameScreen.rowLength].revealed = true; }
+                    if (GameScreen.blocks[index - GameScreen.rowLength].flag == false && GameScreen.blocks[index - GameScreen.rowLength].revealed == false) { GameScreen.blocks[index - GameScreen.rowLength].CheckNextTo(index - GameScreen.rowLength); }
                     if ((index + 1) % GameScreen.rowLength != 0)
                     {
-                        if (blocks[index - GameScreen.rowLength + 1].flag == false) { blocks[index - GameScreen.rowLength + 1].revealed = true; }
+                        if (GameScreen.blocks[index - GameScreen.rowLength + 1].flag == false && GameScreen.blocks[index - GameScreen.rowLength + 1].revealed == false) { GameScreen.blocks[index - GameScreen.rowLength + 1].CheckNextTo(index - GameScreen.rowLength + 1); }
                     }
                 }
-                if (index % GameScreen.rowLength != 0)
+                if (index % GameScreen.rowLength != 0 && GameScreen.blocks[index - 1].revealed == false)
                 {
-                    if (blocks[index - 1].flag == false) { blocks[index - 1].revealed = true; }
+                    if (GameScreen.blocks[index - 1].flag == false && GameScreen.blocks[index - 1].revealed == false) { GameScreen.blocks[index - 1].CheckNextTo(index - 1); }
                 }
-                if ((index + 1) % GameScreen.rowLength != 0)
+                if ((index + 1) % GameScreen.rowLength != 0 && GameScreen.blocks[index + 1].revealed == false)
                 {
-                    if (blocks[index + 1].flag == false) { blocks[index + 1].revealed = true; }
+                    if (GameScreen.blocks[index + 1].flag == false && GameScreen.blocks[index + 1].revealed == false) { GameScreen.blocks[index + 1].CheckNextTo(index + 1); }
                 }
-                if (index < blocks.Count - GameScreen.rowLength)
+                if (index < GameScreen.blocks.Count - GameScreen.rowLength)
                 {
                     if (index % GameScreen.rowLength != 0)
                     {
-                        if (blocks[index + GameScreen.rowLength - 1].flag == false) { blocks[index + GameScreen.rowLength - 1].revealed = true; }
+                        if (GameScreen.blocks[index + GameScreen.rowLength - 1].flag == false && GameScreen.blocks[index + GameScreen.rowLength - 1].revealed == false) { GameScreen.blocks[index + GameScreen.rowLength - 1].CheckNextTo(index + GameScreen.rowLength - 1); }
                     }
-                    if (blocks[index + GameScreen.rowLength].flag == false) { blocks[index + GameScreen.rowLength].revealed = true; }
+                    if (GameScreen.blocks[index + GameScreen.rowLength].flag == false && GameScreen.blocks[index + GameScreen.rowLength].revealed == false) { GameScreen.blocks[index + GameScreen.rowLength].CheckNextTo(index + GameScreen.rowLength); }
                     if ((index + 1) % GameScreen.rowLength != 0)
                     {
-                        if (blocks[index + GameScreen.rowLength + 1].flag == false) { blocks[index + GameScreen.rowLength + 1].revealed = true; }
+                        if (GameScreen.blocks[index + GameScreen.rowLength + 1].flag == false && GameScreen.blocks[index + GameScreen.rowLength + 1].revealed == false) { GameScreen.blocks[index + GameScreen.rowLength + 1].CheckNextTo(index + GameScreen.rowLength + 1); }
                     }
                 }
             }
         }
+
+        private void CheckNextTo(int index)
+        {
+            revealed = true;
+
+            if (nextTo == 0)
+            {
+                RevealSurroundings(index);
+            }
+        }
+        #endregion
     }
 }

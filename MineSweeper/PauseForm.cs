@@ -47,6 +47,8 @@ namespace MineSweeper
 
         }
 
+        //changes back colour of the buttons
+        #region Change Backcolours
         private void continueButton_Click(object sender, EventArgs e)
         {
             buttonResult = DialogResult.Cancel;
@@ -78,5 +80,6 @@ namespace MineSweeper
         {
             exitButton.BackColor = Color.Gainsboro;
         }
+        #endregion
     }
 }
